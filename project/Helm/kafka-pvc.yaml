@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: kafka-pvc
+ namespace: cqrsesprojnamespace
+spec:
+ accessModes:
+    - ReadWriteOnce
+ resources:
+    requests:
+        storage: 50M # Adjust storage size as per your requirements

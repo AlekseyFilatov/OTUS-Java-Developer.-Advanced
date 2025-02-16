@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    creationTimestamp: null
+    name: mongo-configmap
+    namespace: cqrsesprojnamespace
+    labels:
+      app: mongodb
+data:
+    MONGO_DB: microservices
+    MONGO_USER: admin
+    MONGO_PASSWORD: admin
+    MONGO_AUTHDB: admin
+    MONGO_PORT: "27017"

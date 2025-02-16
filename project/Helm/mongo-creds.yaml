@@ -1,0 +1,11 @@
+apiVersion: v1
+stringData:
+    username: admin
+    password: admin
+    authentication-database: admin
+kind: Secret
+metadata:
+    creationTimestamp: null
+    name: mongo-creds
+    namespace: cqrsesprojnamespace
+type: Opaque

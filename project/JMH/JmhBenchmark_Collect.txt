@@ -1,0 +1,589 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for otus.springwebflux.webfluxclient:webfluxclient:jar:0.0.1-SNAPSHOT
+[WARNING] 'build.plugins.plugin.(groupId:artifactId)' must be unique but found duplicate declaration of plugin org.apache.maven.plugins:maven-compiler-plugin @ line 175, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -----------< otus.springwebflux.webfluxclient:webfluxclient >-----------
+[INFO] Building webfluxclient 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.5.0:java (default-cli) @ webfluxclient ---
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepo
+# Parameters: (size = 10)
+
+# Run progress: 0,00% complete, ETA 00:00:00
+# Fork: 1 of 5
+# Warmup Iteration   1: 168905400,000 ns/op
+Iteration   1: 25450,000 ns/op
+
+# Run progress: 1,67% complete, ETA 00:00:39
+# Fork: 2 of 5
+# Warmup Iteration   1: 176163900,000 ns/op
+Iteration   1: 9800,000 ns/op
+
+# Run progress: 3,33% complete, ETA 00:00:44
+# Fork: 3 of 5
+# Warmup Iteration   1: 233357900,000 ns/op
+Iteration   1: 22933,333 ns/op
+
+# Run progress: 5,00% complete, ETA 00:00:48
+# Fork: 4 of 5
+# Warmup Iteration   1: 203134900,000 ns/op
+Iteration   1: 46500,000 ns/op
+
+# Run progress: 6,67% complete, ETA 00:00:46
+# Fork: 5 of 5
+# Warmup Iteration   1: 295664400,000 ns/op
+Iteration   1: 45200,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepo":
+  29976,667 ±(99.9%) 60332,585 ns/op [Average]
+  (min, avg, max) = (9800,000, 29976,667, 46500,000), stdev = 15668,181
+  CI (99.9%): [≈ 0, 90309,252] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepo
+# Parameters: (size = 100)
+
+# Run progress: 8,33% complete, ETA 00:00:47
+# Fork: 1 of 5
+# Warmup Iteration   1: 227862100,000 ns/op
+Iteration   1: 85600,000 ns/op
+
+# Run progress: 10,00% complete, ETA 00:00:47
+# Fork: 2 of 5
+# Warmup Iteration   1: 294845600,000 ns/op
+Iteration   1: 53500,000 ns/op
+
+# Run progress: 11,67% complete, ETA 00:00:47
+# Fork: 3 of 5
+# Warmup Iteration   1: 289963700,000 ns/op
+Iteration   1: 78000,000 ns/op
+
+# Run progress: 13,33% complete, ETA 00:00:46
+# Fork: 4 of 5
+# Warmup Iteration   1: 219927900,000 ns/op
+Iteration   1: 65300,000 ns/op
+
+# Run progress: 15,00% complete, ETA 00:00:45
+# Fork: 5 of 5
+# Warmup Iteration   1: 229651200,000 ns/op
+Iteration   1: 74100,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepo":
+  71300,000 ±(99.9%) 47554,283 ns/op [Average]
+  (min, avg, max) = (53500,000, 71300,000, 85600,000), stdev = 12349,696
+  CI (99.9%): [23745,717, 118854,283] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepo
+# Parameters: (size = 1000)
+
+# Run progress: 16,67% complete, ETA 00:00:44
+# Fork: 1 of 5
+# Warmup Iteration   1: 215414500,000 ns/op
+Iteration   1: 164900,000 ns/op
+
+# Run progress: 18,33% complete, ETA 00:00:43
+# Fork: 2 of 5
+# Warmup Iteration   1: 221290700,000 ns/op
+Iteration   1: 208400,000 ns/op
+
+# Run progress: 20,00% complete, ETA 00:00:42
+# Fork: 3 of 5
+# Warmup Iteration   1: 241453500,000 ns/op
+Iteration   1: 304000,000 ns/op
+
+# Run progress: 21,67% complete, ETA 00:00:41
+# Fork: 4 of 5
+# Warmup Iteration   1: 301644300,000 ns/op
+Iteration   1: 367700,000 ns/op
+
+# Run progress: 23,33% complete, ETA 00:00:40
+# Fork: 5 of 5
+# Warmup Iteration   1: 232582100,000 ns/op
+Iteration   1: 253100,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepo":
+  259620,000 ±(99.9%) 306173,099 ns/op [Average]
+  (min, avg, max) = (164900,000, 259620,000, 367700,000), stdev = 79512,181
+  CI (99.9%): [≈ 0, 565793,099] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollect
+# Parameters: (size = 10)
+
+# Run progress: 25,00% complete, ETA 00:00:39
+# Fork: 1 of 5
+# Warmup Iteration   1: 231485600,000 ns/op
+Iteration   1: 55600,000 ns/op
+
+# Run progress: 26,67% complete, ETA 00:00:38
+# Fork: 2 of 5
+# Warmup Iteration   1: 247973800,000 ns/op
+Iteration   1: 74900,000 ns/op
+
+# Run progress: 28,33% complete, ETA 00:00:38
+# Fork: 3 of 5
+# Warmup Iteration   1: 264651900,000 ns/op
+Iteration   1: 75416,667 ns/op
+
+# Run progress: 30,00% complete, ETA 00:00:37
+# Fork: 4 of 5
+# Warmup Iteration   1: 300216500,000 ns/op
+Iteration   1: 20150,000 ns/op
+
+# Run progress: 31,67% complete, ETA 00:00:36
+# Fork: 5 of 5
+# Warmup Iteration   1: 226617300,000 ns/op
+Iteration   1: 57600,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollect":
+  56733,333 ±(99.9%) 86521,119 ns/op [Average]
+  (min, avg, max) = (20150,000, 56733,333, 75416,667), stdev = 22469,260
+  CI (99.9%): [≈ 0, 143254,452] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollect
+# Parameters: (size = 100)
+
+# Run progress: 33,33% complete, ETA 00:00:35
+# Fork: 1 of 5
+# Warmup Iteration   1: 255671900,000 ns/op
+Iteration   1: 80300,000 ns/op
+
+# Run progress: 35,00% complete, ETA 00:00:34
+# Fork: 2 of 5
+# Warmup Iteration   1: 218330700,000 ns/op
+Iteration   1: 69300,000 ns/op
+
+# Run progress: 36,67% complete, ETA 00:00:33
+# Fork: 3 of 5
+# Warmup Iteration   1: 202737600,000 ns/op
+Iteration   1: 65600,000 ns/op
+
+# Run progress: 38,33% complete, ETA 00:00:32
+# Fork: 4 of 5
+# Warmup Iteration   1: 200119900,000 ns/op
+Iteration   1: 97200,000 ns/op
+
+# Run progress: 40,00% complete, ETA 00:00:31
+# Fork: 5 of 5
+# Warmup Iteration   1: 235566300,000 ns/op
+Iteration   1: 78300,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollect":
+  78140,000 ±(99.9%) 47292,900 ns/op [Average]
+  (min, avg, max) = (65600,000, 78140,000, 97200,000), stdev = 12281,816
+  CI (99.9%): [30847,100, 125432,900] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollect
+# Parameters: (size = 1000)
+
+# Run progress: 41,67% complete, ETA 00:00:30
+# Fork: 1 of 5
+# Warmup Iteration   1: 213937500,000 ns/op
+Iteration   1: 141500,000 ns/op
+
+# Run progress: 43,33% complete, ETA 00:00:29
+# Fork: 2 of 5
+# Warmup Iteration   1: 202059800,000 ns/op
+Iteration   1: 251700,000 ns/op
+
+# Run progress: 45,00% complete, ETA 00:00:28
+# Fork: 3 of 5
+# Warmup Iteration   1: 229817900,000 ns/op
+Iteration   1: 217500,000 ns/op
+
+# Run progress: 46,67% complete, ETA 00:00:27
+# Fork: 4 of 5
+# Warmup Iteration   1: 212665600,000 ns/op
+Iteration   1: 151100,000 ns/op
+
+# Run progress: 48,33% complete, ETA 00:00:26
+# Fork: 5 of 5
+# Warmup Iteration   1: 225162500,000 ns/op
+Iteration   1: 217300,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollect":
+  195820,000 ±(99.9%) 182698,020 ns/op [Average]
+  (min, avg, max) = (141500,000, 195820,000, 251700,000), stdev = 47446,096
+  CI (99.9%): [13121,980, 378518,020] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollectWithBh
+# Parameters: (size = 10)
+
+# Run progress: 50,00% complete, ETA 00:00:25
+# Fork: 1 of 5
+# Warmup Iteration   1: 308099000,000 ns/op
+Iteration   1: 208100,000 ns/op
+
+# Run progress: 51,67% complete, ETA 00:00:25
+# Fork: 2 of 5
+# Warmup Iteration   1: 240737000,000 ns/op
+Iteration   1: 145300,000 ns/op
+
+# Run progress: 53,33% complete, ETA 00:00:24
+# Fork: 3 of 5
+# Warmup Iteration   1: 299040800,000 ns/op
+Iteration   1: 212600,000 ns/op
+
+# Run progress: 55,00% complete, ETA 00:00:23
+# Fork: 4 of 5
+# Warmup Iteration   1: 412805500,000 ns/op
+Iteration   1: 359200,000 ns/op
+
+# Run progress: 56,67% complete, ETA 00:00:22
+# Fork: 5 of 5
+# Warmup Iteration   1: 279070800,000 ns/op
+Iteration   1: 159000,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollectWithBh":
+  216840,000 ±(99.9%) 326875,060 ns/op [Average]
+  (min, avg, max) = (145300,000, 216840,000, 359200,000), stdev = 84888,415
+  CI (99.9%): [≈ 0, 543715,060] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollectWithBh
+# Parameters: (size = 100)
+
+# Run progress: 58,33% complete, ETA 00:00:22
+# Fork: 1 of 5
+# Warmup Iteration   1: 374859900,000 ns/op
+Iteration   1: 1042900,000 ns/op
+
+# Run progress: 60,00% complete, ETA 00:00:21
+# Fork: 2 of 5
+# Warmup Iteration   1: 289217000,000 ns/op
+Iteration   1: 844500,000 ns/op
+
+# Run progress: 61,67% complete, ETA 00:00:20
+# Fork: 3 of 5
+# Warmup Iteration   1: 536392900,000 ns/op
+Iteration   1: 1299900,000 ns/op
+
+# Run progress: 63,33% complete, ETA 00:00:20
+# Fork: 4 of 5
+# Warmup Iteration   1: 610246600,000 ns/op
+Iteration   1: 3929400,000 ns/op
+
+# Run progress: 65,00% complete, ETA 00:00:19
+# Fork: 5 of 5
+# Warmup Iteration   1: 284399500,000 ns/op
+Iteration   1: 672400,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollectWithBh":
+  1557820,000 ±(99.9%) 5183677,242 ns/op [Average]
+  (min, avg, max) = (672400,000, 1557820,000, 3929400,000), stdev = 1346184,518
+  CI (99.9%): [≈ 0, 6741497,242] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollectWithBh
+# Parameters: (size = 1000)
+
+# Run progress: 66,67% complete, ETA 00:00:18
+# Fork: 1 of 5
+# Warmup Iteration   1: 356959400,000 ns/op
+Iteration   1: 1692900,000 ns/op
+
+# Run progress: 68,33% complete, ETA 00:00:17
+# Fork: 2 of 5
+# Warmup Iteration   1: 263346000,000 ns/op
+Iteration   1: 1401800,000 ns/op
+
+# Run progress: 70,00% complete, ETA 00:00:17
+# Fork: 3 of 5
+# Warmup Iteration   1: 298016100,000 ns/op
+Iteration   1: 2125800,000 ns/op
+
+# Run progress: 71,67% complete, ETA 00:00:16
+# Fork: 4 of 5
+# Warmup Iteration   1: 335010300,000 ns/op
+Iteration   1: 2646500,000 ns/op
+
+# Run progress: 73,33% complete, ETA 00:00:15
+# Fork: 5 of 5
+# Warmup Iteration   1: 267741800,000 ns/op
+Iteration   1: 2156800,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoCollectWithBh":
+  2004760,000 ±(99.9%) 1837058,331 ns/op [Average]
+  (min, avg, max) = (1401800,000, 2004760,000, 2646500,000), stdev = 477078,215
+  CI (99.9%): [167701,669, 3841818,331] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoWithBh
+# Parameters: (size = 10)
+
+# Run progress: 75,00% complete, ETA 00:00:14
+# Fork: 1 of 5
+# Warmup Iteration   1: 336172900,000 ns/op
+Iteration   1: 220300,000 ns/op
+
+# Run progress: 76,67% complete, ETA 00:00:13
+# Fork: 2 of 5
+# Warmup Iteration   1: 458781600,000 ns/op
+Iteration   1: 276900,000 ns/op
+
+# Run progress: 78,33% complete, ETA 00:00:12
+# Fork: 3 of 5
+# Warmup Iteration   1: 552695600,000 ns/op
+Iteration   1: 200000,000 ns/op
+
+# Run progress: 80,00% complete, ETA 00:00:11
+# Fork: 4 of 5
+# Warmup Iteration   1: 475819400,000 ns/op
+Iteration   1: 208275,000 ns/op
+
+# Run progress: 81,67% complete, ETA 00:00:10
+# Fork: 5 of 5
+# Warmup Iteration   1: 435757200,000 ns/op
+Iteration   1: 342400,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoWithBh":
+  249575,000 ±(99.9%) 230906,493 ns/op [Average]
+  (min, avg, max) = (200000,000, 249575,000, 342400,000), stdev = 59965,683
+  CI (99.9%): [18668,507, 480481,493] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoWithBh
+# Parameters: (size = 100)
+
+# Run progress: 83,33% complete, ETA 00:00:10
+# Fork: 1 of 5
+# Warmup Iteration   1: 391111900,000 ns/op
+Iteration   1: 1203800,000 ns/op
+
+# Run progress: 85,00% complete, ETA 00:00:09
+# Fork: 2 of 5
+# Warmup Iteration   1: 496753500,000 ns/op
+Iteration   1: 2396500,000 ns/op
+
+# Run progress: 86,67% complete, ETA 00:00:08
+# Fork: 3 of 5
+# Warmup Iteration   1: 736038100,000 ns/op
+Iteration   1: 1195900,000 ns/op
+
+# Run progress: 88,33% complete, ETA 00:00:07
+# Fork: 4 of 5
+# Warmup Iteration   1: 879718800,000 ns/op
+Iteration   1: 16774500,000 ns/op
+
+# Run progress: 90,00% complete, ETA 00:00:06
+# Fork: 5 of 5
+# Warmup Iteration   1: 426848500,000 ns/op
+Iteration   1: 1283800,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoWithBh":
+  4570900,000 ±(99.9%) 26341675,214 ns/op [Average]
+  (min, avg, max) = (1195900,000, 4570900,000, 16774500,000), stdev = 6840849,402
+  CI (99.9%): [≈ 0, 30912575,214] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.4, Java HotSpot(TM) 64-Bit Server VM, 21.0.4+8-LTS-274
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dclassworlds.conf=C:\Users\AlexFil\apache-maven-3.9.9\bin\m2.conf -Dmaven.home=C:\Users\AlexFil\apache-maven-3.9.9 -Dlibrary.jansi.path=C:\Users\AlexFil\apache-maven-3.9.9\lib\jansi-native -Dmaven.multiModuleProjectDirectory=C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient -Dfile.encoding=UTF-8 -XX:+UseParallelGC
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 1 iterations, 1 ns each
+# Measurement: 1 iterations, 1 ns each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoWithBh
+# Parameters: (size = 1000)
+
+# Run progress: 91,67% complete, ETA 00:00:05
+# Fork: 1 of 5
+# Warmup Iteration   1: 240352200,000 ns/op
+Iteration   1: 1509700,000 ns/op
+
+# Run progress: 93,33% complete, ETA 00:00:04
+# Fork: 2 of 5
+# Warmup Iteration   1: 595827800,000 ns/op
+Iteration   1: 3152800,000 ns/op
+
+# Run progress: 95,00% complete, ETA 00:00:03
+# Fork: 3 of 5
+# Warmup Iteration   1: 464311000,000 ns/op
+Iteration   1: 2091900,000 ns/op
+
+# Run progress: 96,67% complete, ETA 00:00:02
+# Fork: 4 of 5
+# Warmup Iteration   1: 278100300,000 ns/op
+Iteration   1: 2767200,000 ns/op
+
+# Run progress: 98,33% complete, ETA 00:00:01
+# Fork: 5 of 5
+# Warmup Iteration   1: 674591000,000 ns/op
+Iteration   1: 1650200,000 ns/op
+
+
+Result "otus.springwebflux.webfluxclient.benchmarks.JmhBenchmark.getRepoWithBh":
+  2234360,000 ±(99.9%) 2732411,323 ns/op [Average]
+  (min, avg, max) = (1509700,000, 2234360,000, 3152800,000), stdev = 709598,544
+  CI (99.9%): [≈ 0, 4966771,323] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:01:08
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                          (size)  Mode  Cnt        Score          Error  Units
+JmhBenchmark.getRepo                   10  avgt    5    29976,667 ±    60332,585  ns/op
+JmhBenchmark.getRepo                  100  avgt    5    71300,000 ±    47554,283  ns/op
+JmhBenchmark.getRepo                 1000  avgt    5   259620,000 ±   306173,099  ns/op
+JmhBenchmark.getRepoCollect            10  avgt    5    56733,333 ±    86521,119  ns/op
+JmhBenchmark.getRepoCollect           100  avgt    5    78140,000 ±    47292,900  ns/op
+JmhBenchmark.getRepoCollect          1000  avgt    5   195820,000 ±   182698,020  ns/op
+JmhBenchmark.getRepoCollectWithBh      10  avgt    5   216840,000 ±   326875,060  ns/op
+JmhBenchmark.getRepoCollectWithBh     100  avgt    5  1557820,000 ±  5183677,242  ns/op
+JmhBenchmark.getRepoCollectWithBh    1000  avgt    5  2004760,000 ±  1837058,331  ns/op
+JmhBenchmark.getRepoWithBh             10  avgt    5   249575,000 ±   230906,493  ns/op
+JmhBenchmark.getRepoWithBh            100  avgt    5  4570900,000 ± 26341675,214  ns/op
+JmhBenchmark.getRepoWithBh           1000  avgt    5  2234360,000 ±  2732411,323  ns/op
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:11 min
+[INFO] Finished at: 2025-02-15T15:39:25+03:00
+[INFO] ------------------------------------------------------------------------
