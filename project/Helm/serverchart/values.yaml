@@ -1,0 +1,15 @@
+appname: grpcserver
+protocol: TCP
+port: 8000
+nodePort: 30102
+namespace: grpcnamespace 
+tier: grpcserver
+replicas: 1
+image:
+  repository: alekseyfilatov/docker-grps-grpcserver:latest
+  tag: latest
+  pullPolicy: Always
+service:
+  type: NodePort
+  port: 8000
+  nodePort: 30102

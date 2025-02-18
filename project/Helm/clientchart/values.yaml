@@ -1,0 +1,15 @@
+appname: grpcclient
+protocol: TCP
+port: 8001
+nodePort: 30101
+namespace: grpcnamespace 
+tier: grpcclient
+replicas: 1
+image:
+  repository: alekseyfilatov/docker-grps-grpcclient:latest
+  tag: latest
+  pullPolicy: Always
+service:
+  type: NodePort
+  port: 8001
+  nodePort: 30101
