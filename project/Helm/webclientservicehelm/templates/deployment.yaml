@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appname }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.appname }}
+      {{- if hasKey .Values "tier" }}
+      tier: {{ .Values.tier }}
+      {{- end }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appname }}
+        {{- if hasKey .Values "tier" }}
+        tier: {{ .Values.tier }}
+        {{- end }}
+    spec:
+      containers:
+        - name: {{ .Values.appname }}
+          image: "{{ .Values.image.repository }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+             - containerPort: {{ .Values.port }}
+               name: rest
+             - containerPort: 5432
+               name: postgres
+             - containerPort: 9092
+               name: kafka
+          env:
+             - name: DATABASE_HOST
+               value: $(POSTGRES_SERVICE_HOST)
+             - name: DATABASE_PORT
+               value: $(POSTGRES_SERVICE_PORT)
+             - name: DATABASE_SCHEMA
+               valueFrom:
+                 configMapKeyRef:
+                   name: postgres-configuration
+                   key: POSTGRES_DB
+             - name: DATABASE_LOGIN
+               valueFrom:
+                 configMapKeyRef:
+                   name: postgres-configuration
+                   key: POSTGRES_USER
+             - name: DATABASE_PASSWORD
+               valueFrom:
+                 configMapKeyRef:
+                   name: postgres-configuration
+                   key: POSTGRES_PASSWORD
+             - name: POSTGRESQL_SERVICE_NAME
+               valueFrom:
+                 configMapKeyRef:
+                   name: postgres-configuration
+                   key: POSTGRESQL_SERVICE_NAME
+             - name: DATASOURCE_KAFKA_HOSTNAME
+               value: kafka:9092
+             - name: DATASOURCE_MONGODB_HOSTNAME
+               value: mongodb
+             - name: WEBCLIENTSERVICE_NAME
+               value: webclientservice
+             - name: ESSERVICE_NAME
+               value: cqrsesproj
+             - name: REPORTSERVICE_NAME
+               value: reportservice
+             - name: GRPCSERVICE_NAME
+               value: grpcclient
+

@@ -2,7 +2,7 @@ appname: grpcclient
 protocol: TCP
 port: 8001
 nodePort: 30101
-namespace: grpcnamespace 
+namespace: cqrsesprojnamespace
 tier: grpcclient
 replicas: 1
 image:
@@ -13,3 +13,6 @@ service:
   type: NodePort
   port: 8001
   nodePort: 30101
+  type: NodePort
+  port: 8098
+  nodePort: 30098

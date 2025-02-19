@@ -1,0 +1,15 @@
+appname: reportservice
+protocol: TCP
+port: 8097
+nodePort: 30097
+namespace: cqrsesprojnamespace 
+tier: reportservice
+replicas: 1
+image:
+  repository: alekseyfilatov/reportservice:latest
+  tag: latest
+  pullPolicy: Always
+service:
+  type: NodePort
+  port: 8097
+  nodePort: 30097

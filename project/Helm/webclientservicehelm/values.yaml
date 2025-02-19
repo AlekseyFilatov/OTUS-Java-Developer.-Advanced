@@ -1,0 +1,15 @@
+appname: webclientservice
+protocol: TCP
+port: 8089
+nodePort: 30089
+namespace: cqrsesprojnamespace 
+tier: webclientservice
+replicas: 1
+image:
+  repository: alekseyfilatov/webclientservice:latest
+  tag: latest
+  pullPolicy: Always
+service:
+  type: NodePort
+  port: 8089
+  nodePort: 30089

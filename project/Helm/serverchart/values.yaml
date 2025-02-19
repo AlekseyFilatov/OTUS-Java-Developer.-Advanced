@@ -2,7 +2,7 @@ appname: grpcserver
 protocol: TCP
 port: 8000
 nodePort: 30102
-namespace: grpcnamespace 
+namespace: cqrsesprojnamespace
 tier: grpcserver
 replicas: 1
 image:
