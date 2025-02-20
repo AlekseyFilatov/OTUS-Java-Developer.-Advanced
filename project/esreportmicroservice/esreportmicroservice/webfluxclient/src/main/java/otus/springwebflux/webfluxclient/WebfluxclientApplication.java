@@ -2,6 +2,7 @@ package otus.springwebflux.webfluxclient;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootApplication
+@EnableAutoConfiguration
 public class WebfluxclientApplication {
 
 	public static void main(String[] args) {
@@ -32,13 +34,13 @@ public class WebfluxclientApplication {
         return executor;
     }
 
-   /* @Value("${target.uri}")
+    @Value("${target.uri}")
     private String targetUri;
 
-    @Bean("webClientStart")
+    @Bean
     public WebClient webClient() {
         return WebClient.builder().baseUrl(targetUri).build();
-    }*/
+    }
 
     @PostConstruct
     public void init() {
