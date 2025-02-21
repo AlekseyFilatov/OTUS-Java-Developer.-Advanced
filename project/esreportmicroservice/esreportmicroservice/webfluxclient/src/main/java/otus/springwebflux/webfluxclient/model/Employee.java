@@ -12,11 +12,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 @Getter
 @Setter
 @ToString
-
 public class Employee {
 
 	private Long employeeId;

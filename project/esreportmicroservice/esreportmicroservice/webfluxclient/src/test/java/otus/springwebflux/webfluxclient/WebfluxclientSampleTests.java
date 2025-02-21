@@ -5,14 +5,16 @@ import java.util.concurrent.TimeoutException;
 import net.jodah.concurrentunit.Waiter;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import otus.springwebflux.webfluxclient.model.Employee;
 import reactor.core.publisher.Flux;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,13 +24,15 @@ import org.springframework.web.reactive.function.client.WebClient;
 import lombok.extern.slf4j.Slf4j;
 
 
-@Slf4j
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {WebfluxclientSampleTests.class})
 @TestConfiguration
 class WebfluxclientSampleTests {
+
+    private static final Logger log = LoggerFactory.getLogger(WebfluxclientSampleTests.class);
 
     /*
      * https://stackoverflow.com/questions/50329817/unable-to-start-reactivewebapplicationcontext-due-to-missing-reactivewebserverfa

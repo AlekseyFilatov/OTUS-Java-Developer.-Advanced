@@ -63,7 +63,7 @@ public class WebfluxclientPerfomanceTests {
             @Override
             public MockResponse dispatch(@NotNull RecordedRequest recordedRequest) throws InterruptedException {
                 String pathParam = recordedRequest.getPath().replaceAll("/slow/", "");
-                List<Employee> personsPart2 = List.of(
+                List<Employee> employeesPart2 = List.of(
                         new Employee(Long.valueOf(r.nextInt(100000)), "Name" + pathParam, "Surname" + pathParam,
                          String.valueOf(r.nextInt(100)), String.valueOf(r.nextInt(100))),
                         new Employee(Long.valueOf(r.nextInt(100000)), "Name" + pathParam, "Surname" + pathParam,
@@ -73,7 +73,7 @@ public class WebfluxclientPerfomanceTests {
                 try {
                     return new MockResponse()
                             .setResponseCode(200)
-                            .setBody(mapper.writeValueAsString(personsPart2))
+                            .setBody(mapper.writeValueAsString(employeesPart2))
                             .setHeader("Content-Type", "application/json")
                             .setBodyDelay(200, TimeUnit.MILLISECONDS);
                 }

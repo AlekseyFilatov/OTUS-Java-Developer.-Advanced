@@ -8,7 +8,7 @@ import otus.springwebflux.webfluxclient.dto.CreateEmployeeClientRequestDTO;
 import otus.springwebflux.webfluxclient.dto.CreateEmployeeRequestDTO;
 import otus.springwebflux.webfluxclient.dto.EmployeeAggreegateID;
 import otus.springwebflux.webfluxclient.model.Employee;
-import otus.springwebflux.webfluxclient.repository.EmployeeRepository;
+
 import otus.springwebflux.webfluxclient.repository.EmployeeRepositoryImpl;
 import otus.springwebflux.webfluxclient.service.ApiWebClient;
 import otus.springwebflux.webfluxclient.service.FileService;
@@ -17,12 +17,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import org.reactivestreams.Publisher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.client.WebClient;
 
-import ch.qos.logback.core.pattern.color.BoldBlueCompositeConverter;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,7 +54,7 @@ public class EmployeeController {
     }       
 
 
-    @GetMapping("/fileemployees/{fileName}")
+    @GetMapping(path = "/fileemployees/{fileName}")
     public Flux<Employee> fileEmployeesRead(@PathVariable("fileName") String fileName) {
 
         return fileService.loadObjectList(Employee.class, fileName)
@@ -67,12 +62,12 @@ public class EmployeeController {
         .flatMap(emp -> Mono.just(emplRepo.saveEmployeeAll(emp)));
     }
 
-    @GetMapping("/repositoryEmployee")
+    @GetMapping(path = "/repositoryEmployee")
     public Flux<EmployeeAggreegateID> sendEmployeeRepository() {
      return webClientService.sendfromEmployeeRepository().doOnNext(msg -> log.info("%s -> WebClientService.sendfromEmployeeRepository -> %s, Client: %s".formatted(Thread.currentThread().getName(),java.time.LocalTime.now(), msg)));
     }
 
-    @PostMapping("/employeees")
+    @PostMapping(path = "/employeees")
     public Flux<EmployeeAggreegateID> createEmployeeES(@RequestBody CreateEmployeeRequestDTO dto) {
         return Flux.from(webClientService.createClientES(dto)).doOnNext(msg -> log.info("%s -> WebClientService.sendfromEmployeeRepository -> %s, Client: %s".formatted(Thread.currentThread().getName(),java.time.LocalTime.now(), msg)));
     }
@@ -90,7 +85,7 @@ public class EmployeeController {
                     .flatMap(emp -> Mono.from(webClientService.createClientGRPC(emp)));
     }
 
-    @PostMapping("/employeegrpc")
+    @PostMapping(path = "/employeegrpc")
     public Flux<EmployeeAggreegateID> createEmployeeGRPC(@RequestBody CreateEmployeeClientRequestDTO dto) {
         return Flux.from(webClientService.createClientGRPC(dto)).doOnNext(msg -> log.info("%s -> WebClientService.sendfromEmployeeRepository -> %s, Client: %s".formatted(Thread.currentThread().getName(),java.time.LocalTime.now(), msg)));
     }
@@ -137,6 +132,7 @@ public class EmployeeController {
 
     @GetMapping("/integration/{param}")
     public Flux<Employee> findEmployeesIntegration(@PathVariable("param") String param) {
+
         return Flux.fromStream(this::prepareStreamPart1).log()
             .mergeWith(
                 apiWebClient.webClient().get().uri("/slow/" + param)
@@ -149,7 +145,7 @@ public class EmployeeController {
     @GetMapping("/integration-in-different-pool/{param}")
     public Flux<Employee> findEmployeesIntegrationInDifferentPool(@PathVariable("param") String param) {
         return Flux.fromStream(this::prepareStreamPart1).log()
-            .mergeWith(
+            .mergeWith(                
                 apiWebClient.webClient().get().uri("/slow/" + param)
                     .retrieve()
                     .bodyToFlux(Employee.class)

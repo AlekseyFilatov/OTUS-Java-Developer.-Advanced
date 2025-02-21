@@ -38,6 +38,7 @@ import otus.springwebflux.webfluxclient.dto.CreateEmployeeClientRequestDTO;
 import otus.springwebflux.webfluxclient.dto.CreateEmployeeRequestDTO;
 import otus.springwebflux.webfluxclient.dto.EmployeeAggreegateID;
 import otus.springwebflux.webfluxclient.exceptions.ApiWebClientException;
+import otus.springwebflux.webfluxclient.exceptions.ApiWebClientInEventSourcingRuntimeException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
@@ -133,7 +134,7 @@ public class ApiWebClient {
                 httpHeaders.add("Expires", "0");
             };
             
-           return webClientReport().get()
+           return  webClientReport().get()
                     .uri("/employee/records/report")
                     .accept(MediaType.APPLICATION_PDF)
                     .headers(headers)
@@ -148,10 +149,10 @@ public class ApiWebClient {
                         throw new ApiWebClientException("HTTP Status 400 error - " + clientResponse.toString());  // throw custom exception
                     })
                     .bodyToMono(DataBuffer.class)
-                    .onErrorResume(e -> {
-                        log.error("getReport error: " + e.getMessage());
-                        return Mono.empty();
-                     }).log();                   
+                    .onErrorMap(e -> {
+                        log.error("GET Report Error: %s%n".formatted(e.getMessage()));
+                        return new ApiWebClientInEventSourcingRuntimeException("GET Report Error: %s%n".formatted(e.getMessage()), e);
+                     });                   
         }        
 
     public Mono<EmployeeAggreegateID> createClient(CreateEmployeeRequestDTO dto) {
@@ -202,9 +203,10 @@ public class ApiWebClient {
                 })
                 .bodyToMono(String.class))
                 .flatMap(emp -> Mono.just(new EmployeeAggreegateID(emp)))
-                .onErrorResume(e -> {
-                    log.error("error: " + e.getMessage());
-                    return Mono.empty();
+                .onErrorMap(e -> {
+                    log.error("GRPC Client Error: %s%n".formatted(e.getMessage()));
+                    return new ApiWebClientInEventSourcingRuntimeException("GRPC Client Error: %s%n".formatted(e.getMessage()), e);
+                    //return Mono.empty();
                  });              
                 
     }
