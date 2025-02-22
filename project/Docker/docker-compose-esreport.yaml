@@ -1,0 +1,296 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16.0
+    container_name: postgresql_microservices
+    hostname: postgres
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    restart: "no"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=microservices
+      - POSTGRES_HOST=5432
+      - POSTGRES_SERVICE=postgres
+    command: -p 5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    networks: [ "microservices" ]
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.0.9
+    container_name: zookeeper-eventsourcing-microservices
+    restart: "no"
+    healthcheck:
+      test: "[[ $$(echo srvr | nc localhost 2181 | grep -oG 'Mode: standalone') = \"Mode: standalone\" ]]"
+      interval: 10s
+      timeout: 1s
+      retries: 30
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_TICK_TIME=2000
+    volumes:
+      - "./zookeeper:/zookeeper"
+    networks: [ "microservices" ]
+
+  kafka:
+    image: confluentinc/cp-kafka:7.0.9
+    container_name: kafka-eventsourcing-microservices
+    hostname: kafka
+    restart: "no"
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    healthcheck:
+      test: "test $$( /usr/bin/zookeeper-shell zookeeper:2181 get /brokers/ids/1 | grep { ) != ''"
+      interval: 3s
+      timeout: 2s
+      retries: 300
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,PLAINTEXT_HOST2:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9191,PLAINTEXT_HOST://kafka:9093,PLAINTEXT_HOST2://kafka:9092
+      # BOOTSTRAP_SERVERS: kafka1:9191,kafka2:9192
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+    expose:
+      - "9093"
+      - "9191"
+      - "9092"
+    ports:
+      - "9191:9191"
+      - "9092:9092"
+      - "9093:9093"
+    networks: [ "microservices" ]
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:4.0.1
+    container_name: kafdrop-eventsourcing-microservices
+    restart: "no"
+    depends_on:
+      - "kafka"
+    expose:
+      - "9000"
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:9191"
+      JVM_OPTS: "-XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
+    networks: [ "microservices" ]
+
+  redis:
+    image: redis:6-alpine
+    restart: "no"
+    container_name: microservices_redis-microservices
+    ports:
+      - "6379:6379"
+    networks: [ "microservices" ]
+
+  mongodb:
+    image: docker.io/bitnami/mongodb:4.4
+    restart: "no"
+    container_name: microservices_mongo-microservices
+    hostname: mongodb
+    environment:
+      MONGODB_ROOT_USER: admin
+      MONGODB_ROOT_PASSWORD: admin
+      BITNAMI_DEBUG: "false"
+      ALLOW_EMPTY_PASSWORD: "no"
+      MONGODB_SYSTEM_LOG_VERBOSITY: "0"
+      MONGODB_DISABLE_SYSTEM_LOG: "no"
+      MONGODB_DISABLE_JAVASCRIPT: "no"
+      MONGODB_ENABLE_JOURNAL: "yes"
+      MONGODB_ENABLE_IPV6: "no"
+      MONGODB_ENABLE_DIRECTORY_PER_DB: "no"
+      MONGODB_DATABASE: "microservices"
+    volumes:
+      - ./mongodb_data_container:/data/db
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    networks: [ "microservices" ]
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-microservices
+    restart: "no"
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks: [ "microservices" ]
+
+  node_exporter:
+    container_name: node_exporter_container-microservices
+    restart: "no"
+    image: prom/node-exporter
+    ports:
+      - '9101:9100'
+    networks: [ "microservices" ]
+
+  grafana:
+    container_name: grafana_container-microservices
+    restart: "no"
+    build: monitoring/grafana
+    volumes:
+      - ./grafana:/var/lib/grafana
+    ports:
+      - '3005:3000'
+    networks: [ "microservices" ]
+
+  jaeger:
+    container_name: jaeger_container-microservices
+    restart: "no"
+    image: jaegertracing/all-in-one:1.21
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "14250:14250"
+      - "9411:9411"
+    networks: [ "microservices" ]
+
+  cqrsesproj:
+    build:
+      context: ./cqrsesproj/
+      dockerfile: Dockerfile
+    hostname: cqrsesproj
+    container_name: cqrsesproj
+    restart: "no"
+    depends_on:
+      - "kafka"
+    expose:
+      - "8087"
+    ports:
+      - 8087:8087
+    environment:
+        AUTH: false
+        DATASOURCE_DB_URL: jdbc:postgresql://postgres:5432/microservices
+        DATASOURCE_DB_USER: postgres
+        DATASOURCE_DB_PASSWORD: postgres
+        FLYWAY_DB_URL: jdbc:postgresql://postgres:5432/microservices
+        FLYWAY_DB_USER: postgres
+        FLYWAY_DB_PASSWORD: postgres
+        DATASOURCE_MONGODB_DB: microservices
+        DATASOURCE_MONGODB_HOSTNAME: mongodb
+        DATASOURCE_KAFKA_HOSTNAME: kafka:9093
+        POSTGRESQL_DB_NAME: microservices
+        POSTGRESQL_SERVICE_NAME: postgres
+        ZIPKIN_NAME: jaeger
+    networks: [ "microservices" ]
+
+  grpcserver:
+    build:
+      context: ./grpcservice/
+      dockerfile: DockerfileServer
+    hostname: grpcserver
+    container_name: grpcserver
+    restart: "no"
+    expose:
+      - "8000"
+    ports:
+      - 8000:8000
+    environment:
+      AUTH: false
+    networks: [ "microservices" ]
+
+  grpcclient:
+    build:
+      context: ./grpcservice/
+      dockerfile: DockerfileClient
+    hostname: grpcclient
+    container_name: grpcclient
+    restart: "no"
+    expose:
+      - "8001"
+      - "8098"
+    ports:
+      - 8001:8001
+      - 8098:8098
+    environment:
+      AUTH: false
+      SERVER_PORT: 8000
+      CLIENT_PORT: 8001
+      SERVER_NAME: grpcserver
+      CLIENT_NAME: grpcclient
+    networks: [ "microservices" ]
+
+  reportservice:
+    build:
+      context: ./reportservice/
+      dockerfile: Dockerfile
+    hostname: reportservice
+    container_name: reportservice
+    restart: "no"
+    depends_on:
+      - "mongodb"
+    expose:
+      - "8097"
+    ports:
+      - 8097:8097
+    environment:
+      AUTH: false
+      DATASOURCE_DB_URL: jdbc:postgresql://postgres:5432/microservices
+      DATASOURCE_DB_USER: postgres
+      DATASOURCE_DB_PASSWORD: postgres
+      FLYWAY_DB_URL: jdbc:postgresql://postgres:5432/microservices
+      FLYWAY_DB_USER: postgres
+      FLYWAY_DB_PASSWORD: postgres
+      DATASOURCE_MONGODB_DB: microservices
+      DATASOURCE_MONGODB_HOSTNAME: mongodb
+      DATASOURCE_KAFKA_HOSTNAME: kafka:9093
+      POSTGRESQL_DB_NAME: microservices
+      POSTGRESQL_SERVICE_NAME: postgres
+    networks: [ "microservices" ]
+
+  webclientservice:
+    build:
+      context: ./webclientservice/
+      dockerfile: Dockerfile
+    hostname: webclientservice
+    container_name: webclientservice
+    restart: "no"
+    expose:
+      - "8089"
+    ports:
+      - 8089:8089
+    environment:
+      AUTH: false
+      DATASOURCE_DB_URL: jdbc:postgresql://postgres:5432/microservices
+      DATASOURCE_DB_USER: postgres
+      DATASOURCE_DB_PASSWORD: postgres
+      FLYWAY_DB_URL: jdbc:postgresql://postgres:5432/microservices
+      FLYWAY_DB_USER: postgres
+      FLYWAY_DB_PASSWORD: postgres
+      DATASOURCE_MONGODB_DB: microservices
+      DATASOURCE_MONGODB_HOSTNAME: mongodb
+      DATASOURCE_KAFKA_HOSTNAME: kafka:9093
+      POSTGRESQL_DB_NAME: microservices
+      POSTGRESQL_SERVICE_NAME: postgres
+      ESSERVICE_NAME: cqrsesproj
+      REPORTSERVICE_NAME: reportservice
+      GRPCSERVICE_NAME: grpcclient
+      WEBCLIENTSERVICE_NAME: webclientservice
+    networks: [ "microservices" ]
+      
+networks:
+  microservices:
+    name: microservices

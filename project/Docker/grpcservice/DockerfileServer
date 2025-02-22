@@ -1,0 +1,5 @@
+FROM openjdk:17
+VOLUME /tmp
+EXPOSE 8000
+COPY targetserver/grpc-server-1.0-SNAPSHOT.jar grpc-server-1.0-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/grpc-server-1.0-SNAPSHOT.jar"]

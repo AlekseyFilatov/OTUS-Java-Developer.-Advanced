@@ -1,0 +1,15 @@
+appname: cqrsesproj
+protocol: TCP
+port: 8087
+nodePort: 30087
+namespace: cqrsesprojnamespace 
+tier: cqrsesproj
+replicas: 1
+image:
+  repository: alekseyfilatov/cqrsesproj:latest
+  tag: latest
+  pullPolicy: Always
+service:
+  type: NodePort
+  port: 8087
+  nodePort: 30087

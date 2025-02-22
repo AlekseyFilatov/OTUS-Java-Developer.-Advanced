@@ -1,0 +1,16 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-pv
+  namespace: cqrsesprojnamespace
+  labels:
+    app: postgres-container
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 50M
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/data"

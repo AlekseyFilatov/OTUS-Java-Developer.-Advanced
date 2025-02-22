@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: mongodb
+ namespace: cqrsesprojnamespace
+ labels:
+    app: mongodb
+spec:
+ type: NodePort
+ selector:
+    app: mongodb
+ ports:
+     - port: 27017
+       protocol: TCP
+       targetPort: 27017
+---
+ 
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+ name: mongodb
+ namespace: cqrsesprojnamespace
+ labels:
+   app: mongodb
+spec:
+ serviceName: mongodb
+ replicas: 1 # Adjust as per your requirements
+ selector:
+    matchLabels:
+        app: mongodb
+ template:
+    metadata:
+        namespace: cqrsesprojnamespace
+        labels:
+            app: mongodb
+    spec:
+     containers:
+         - name: mongodb
+           image: docker.io/bitnami/mongodb:4.4 #mongo:latest # Use the official MongoDB Docker image
+           ports:
+            - containerPort: 27017
+           env:
+            - name: MONGO_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-creds
+                  key: authentication-database
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-creds
+                  key: username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-creds
+                  key: password	
+            - name: MONGODB_USERNAME
+              value: admin
+            - name: MONGODB_PASSWORD
+              value: admin   
+            - name: MONGODB_DATABASE
+              value: microservices   
+            - name: MONGODB_ROOT_PASSWORD
+              value: admin 
+            - name: MONGODB_ROOT_USER
+              value: admin           
+           envFrom:
+            - secretRef:
+               name: mongo-creds
+           volumeMounts:
+            - name: mongodb-pvc
+              mountPath: /data/db
+ volumeClaimTemplates:
+    - metadata:
+        name: mongodb-pvc
+        namespace: cqrsesprojnamespace
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+           requests:
+              storage: 50M # Should match the size specified in mongodb-pvc.yaml

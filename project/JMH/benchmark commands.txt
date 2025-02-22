@@ -1,0 +1,1 @@
+C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient>mvn exec:java -f "C:\Users\AlexFil\VisualStudioCode\webfluxclient\webfluxclient\pom.xml" >> JmhBenchmark_Collect.txt
