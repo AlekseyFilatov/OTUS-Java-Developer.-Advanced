@@ -177,6 +177,8 @@ services:
     restart: "no"
     depends_on:
       - "kafka"
+      - "postgres"
+      - "mongodb"
     expose:
       - "8087"
     ports:
