@@ -1,5 +1,5 @@
-FROM openjdk:17
+FROM eclipse-temurin:17-jre-alpine
 VOLUME /tmp
 EXPOSE 8000
 COPY targetserver/grpc-server-1.0-SNAPSHOT.jar grpc-server-1.0-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/grpc-server-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-XX:MaxRAMPercentage=80.0","-jar","/grpc-server-1.0-SNAPSHOT.jar"]

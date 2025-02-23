@@ -222,11 +222,13 @@ services:
     container_name: grpcclient
     restart: "no"
     expose:
-      - "8001"
+      - "8099"
       - "8098"
+      - "8001"
     ports:
-      - 8001:8001
-      - 8098:8098
+      - "8098:8098"
+      - "8099:8099"
+      - "8001:8001"
     environment:
       AUTH: false
       SERVER_PORT: 8000
