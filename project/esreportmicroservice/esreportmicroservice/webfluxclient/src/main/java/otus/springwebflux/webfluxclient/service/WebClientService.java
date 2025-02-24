@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import otus.springwebflux.webfluxclient.dto.CreateEmployeeRequestDTO;
 import otus.springwebflux.webfluxclient.dto.EmployeeAggreegateID;
 import otus.springwebflux.webfluxclient.exceptions.EmployeeCreateInEventSourcingRuntimeException;
 import otus.springwebflux.webfluxclient.model.Employee;
+import otus.springwebflux.webfluxclient.repository.EmployeeRepositoryImpl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
@@ -32,6 +34,7 @@ public class WebClientService {
     private final RepositoryService repositoryService;
     private final ApiWebClient apiWebClient;
     private final FileService fileService;
+    private final EmployeeRepositoryImpl employeeRepository;
 
     @RateLimiter(name = "default")
     @CircuitBreaker(name = "default")
@@ -50,6 +53,14 @@ public class WebClientService {
             throw new EmployeeCreateInEventSourcingRuntimeException(dto.userName(), ex);}))
             .switchIfEmpty ( Flux.defer(() -> Flux.error ( new ResponseStatusException 
         ( HttpStatus.NOT_FOUND , " Employee %s not create ".formatted(dto.userName()) ))));
+    }
+
+    @RateLimiter(name = "default")
+    @CircuitBreaker(name = "default")
+    public Flux<Employee> loadFileToInMemRepository(String fileName) {
+        //return fileService.loadObjectList(Employee.class, fileName)
+        return fileService.loadObjectList(Employee.class, fileName)
+        .flatMap(emp -> Mono.just(employeeRepository.saveEmployeeAll(emp)));
     }
 
     @RateLimiter(name = "default")
