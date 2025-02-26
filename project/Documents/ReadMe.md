@@ -123,7 +123,7 @@ curl --location 'localhost:8098/api/employee' \
 ![alt text](<project schema-1.jpg>)
 
 Результаты нагрузочного тестирования выполненного с помощью JMeter
-(Профилирование проводилось при помощи VisualVM, JDK Mission Control, Grafana, Prometheus)
+(Профилирование проводилось при помощи VisualVM, JDK Mission Control, Memory Analyzer Grafana, Prometheus)
 
 Grafana Dashboards:
 
