@@ -91,7 +91,8 @@ public class FileService {
     }
 
     public static File stream2file (InputStream in, String fileName) throws IOException {
-        File tempFile = Files.createTempFile(fileName.split(".")[0],fileName.split(".")[1]).toFile();
+        String[] fileNameSplit=fileName.split(".", 2);
+        File tempFile = Files.createTempFile(fileNameSplit[0],fileNameSplit[1]).toFile();
         try(FileOutputStream out = new FileOutputStream(tempFile)) {
                 FileUtils.copyInputStreamToFile(in, tempFile);
                 return tempFile;

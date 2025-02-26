@@ -6,3 +6,5 @@ https://stackoverflow.com/questions/54813704/how-to-add-dashboard-configuration-
       Полный исчерпывающий пример кода вы можете найти в следующем репозитории github https://github.com/cirocosta/sample-grafana
       Оригинальная статья с пояснением есть - https://ops.tips/blog/initialize-grafana-with-preconfigured-dashboards/
  */
+
+docker-compose up -d --build

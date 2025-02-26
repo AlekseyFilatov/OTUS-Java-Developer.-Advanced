@@ -27,7 +27,27 @@ scrape_configs:
     static_configs:
       - targets: [ 'host.docker.internal:9100' ]
 
-  - job_name: 'microservice'
+  - job_name: 'microservice_es'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'host.docker.internal:8087' ]
+      
+  - job_name: 'microservice_report'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8097' ]
+      
+  - job_name: 'microservice_webclient'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8089' ]
+      
+  - job_name: 'microservice_grpcclient_8098'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8098' ]
+
+  - job_name: 'microservice_grpcclient_8099'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8099' ]
