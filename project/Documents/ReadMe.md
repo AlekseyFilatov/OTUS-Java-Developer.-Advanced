@@ -150,3 +150,14 @@ Grafana Dashboards:
 
 4. WebClient Service
 
+![alt text](projectWebClientAfterTestVisualVM.PNG)
+
+![alt text](projectWebClientAfterTestJFRException.PNG)
+
+До теста:
+
+![alt text](projectWebClientUndoTest.PNG)
+
+После теста:
+
+![alt text](projectWebClientAfterTestMemoryAnalyzer.PNG)
