@@ -44,8 +44,6 @@ public class EmployeeController {
 
     private final ThreadPoolTaskExecutor taskExecutor;
     private final ApiWebClient apiWebClient;
-    private final FileService fileService;
-    private final EmployeeRepositoryImpl emplRepo;
     private final WebClientService webClientService;
 
     @GetMapping(path = "/reportemployees", produces = "application/pdf") 
@@ -56,10 +54,7 @@ public class EmployeeController {
 
     @GetMapping(path = "/fileemployees/{fileName}")
     public Flux<Employee> fileEmployeesRead(@PathVariable("fileName") String fileName) {
-
-        return fileService.loadObjectList(Employee.class, fileName)
-        //.publishOn(Schedulers.boundedElastic())
-        .flatMap(emp -> Mono.just(emplRepo.saveEmployeeAll(emp)));
+        return webClientService.loadFileToInMemRepository(fileName).doOnNext(msg -> log.info("%s -> WebClientService.loadFileToInMemRepository -> %s, File: %s".formatted(Thread.currentThread().getName(),java.time.LocalTime.now(), fileName)));
     }
 
     @GetMapping(path = "/repositoryEmployee")
@@ -74,10 +69,9 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public Flux<EmployeeAggreegateID> createEmployee() {
-        fileService.loadObjectList(Employee.class, "listEmpl.csv")
-            //.publishOn(Schedulers.boundedElastic())
-            .flatMap(emp -> Mono.just(emplRepo.saveEmployeeAll(emp)))
-            .doOnNext(msg -> log.info("%s -> WebClientService.fileService.loadObjectList -> %s, Client: %s".formatted(Thread.currentThread().getName(),java.time.LocalTime.now(), msg))).subscribe();
+        String fileName = "listEmpl.csv";
+        webClientService.loadFileToInMemRepository(fileName)
+            .doOnNext(msg -> log.info("%s -> webClientService.loadFileToInMemRepository -> %s, File: %s".formatted(Thread.currentThread().getName(),java.time.LocalTime.now(), fileName))).subscribe();
             //.flatMap(emp -> Mono.from(webClientService.sendfromEmployeeClientRepository()));
             //.flatMap(emp -> Flux.from(webClientService.createClientGRPC(emp)));
             

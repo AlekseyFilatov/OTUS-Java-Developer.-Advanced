@@ -1,10 +1,13 @@
 package com.otus.docum.reportservice.adapters.service;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+
+import com.otus.docum.reportservice.application.exception.ResourceLoadException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,15 +26,20 @@ public class JasperReportService {
 
     private final FileService fileService;
 
-    public JasperPrint getReportPrint(String reportFile, Map<String, Object> empParams) throws JRException{
-        return JasperFillManager.fillReport
+    public JasperPrint getReportPrint(String reportFile, Map<String, Object> empParams) throws JRException, ResourceLoadException{
+		Path file = fileService.getFileURIFromResources(reportFile);
+		try {			
+			return JasperFillManager.fillReport
 				   (        //"employees-details.jrxml"
 							JasperCompileManager.compileReport(
-								fileService.getFileURIFromResources(reportFile).toString()
+								file.toString()
 							)
 							, empParams // dynamic parameters
 							, new JREmptyDataSource()
 					);
+		} finally {
+			if (file.toFile().exists()) file.toFile().delete();
+		}
     }
 
 }
